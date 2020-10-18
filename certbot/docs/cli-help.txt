@@ -676,7 +676,7 @@ dns-valuedomain:
                         The number of seconds to wait for DNS to propagate
                         before asking the ACME server to verify the DNS
                         record. (default: 90)
-  --dns-sakuracloud-credentials DNS_VALUEDOMAIN_CREDENTIALS
+  --dns-valuedomain-credentials DNS_VALUEDOMAIN_CREDENTIALS
                         Value Domain credentials file. (default: None)
 
 manual:
