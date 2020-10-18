@@ -91,7 +91,7 @@ class _ValueDomainLexiconClient(dns_common_lexicon.LexiconClient):
         domain_name_guesses = dns_common.base_domain_name_guesses(domain)
         for domain_name in domain_name_guesses:
             # Value Domain uses "exmaple.com" as a ID for "*.subdomain.example.com"
-            if len(domain.split(".")) != 2:
+            if len(domain_name.split(".")) != 2:
                 continue
 
             try:
