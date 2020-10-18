@@ -88,8 +88,31 @@ class _ValueDomainLexiconClient(dns_common_lexicon.LexiconClient):
 
     def _find_domain_id(self, domain):
         domain_name_guesses = dns_common.base_domain_name_guesses(domain)
-        for domain in domain_name_guesses:
-            if len(domain.split(".")) == 2:
-                return domain
+        for domain_name in domain_name_guesses:
+            # Value Domain uses "exmaple.com" as a ID for "*.subdomain.example.com"
+            if len(domain.split(".")) != 2:
+                continue
+
+            try:
+                if hasattr(self.provider, 'options'):
+                    # For Lexicon 2.x
+                    self.provider.options['domain'] = domain_name
+                else:
+                    # For Lexicon 3.x
+                    self.provider.domain = domain_name
+
+                self.provider.authenticate()
+
+                return  # If `authenticate` doesn't throw an exception, we've found the right name
+            except HTTPError as e:
+                result = self._handle_http_error(e, domain_name)
+
+                if result:
+                    raise result
+            except Exception as e:  # pylint: disable=broad-except
+                result = self._handle_general_error(e, domain_name)
+
+                if result:
+                    raise result  # pylint: disable=raising-bad-type
         raise errors.PluginError('Unable to determine zone identifier for {0} using zone names: {1}'
                                  .format(domain, domain_name_guesses))
