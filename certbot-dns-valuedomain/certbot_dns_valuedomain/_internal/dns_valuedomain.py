@@ -5,6 +5,7 @@ from lexicon.providers import valuedomain
 import zope.interface
 
 from certbot import interfaces
+from certbot import errors
 from certbot.plugins import dns_common
 from certbot.plugins import dns_common_lexicon
 
@@ -84,3 +85,11 @@ class _ValueDomainLexiconClient(dns_common_lexicon.LexiconClient):
         if domain_name in str(e) and (str(e).startswith('404 Client Error: Not Found for url:')):
             return None  # Expected errors when zone name guess is wrong
         return super(_ValueDomainLexiconClient, self)._handle_http_error(e, domain_name)
+
+    def _find_domain_id(self, domain):
+        domain_name_guesses = dns_common.base_domain_name_guesses(domain)
+        for domain in domain_name_guesses:
+            if len(".".split(domain)) == 2:
+                return domain
+        raise errors.PluginError('Unable to determine zone identifier for {0} using zone names: {1}'
+                                 .format(domain, domain_name_guesses))
