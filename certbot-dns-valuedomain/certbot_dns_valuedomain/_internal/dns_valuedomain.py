@@ -1,6 +1,7 @@
 """DNS Authenticator for Value Domain DNS."""
 import logging
 
+from requests.exceptions import HTTPError
 from lexicon.providers import valuedomain
 import zope.interface
 
