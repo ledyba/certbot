@@ -277,3 +277,4 @@ Authors
 * [Yuseong Cho](https://github.com/g6123)
 * [Zach Shepherd](https://github.com/zjs)
 * [陈三](https://github.com/chenxsan)
+* [Kaede Fujisaki a.k.a. ledyba](https://github.com/ledyba)
