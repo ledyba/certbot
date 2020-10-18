@@ -1,4 +1,4 @@
-usage: 
+usage:
   certbot [SUBCOMMAND] [options] [-d DOMAIN] [-d DOMAIN] ...
 
 Certbot can obtain and install HTTPS/TLS/SSL certificates.  By default,
@@ -474,6 +474,8 @@ plugins:
                         using Route53 for DNS). (default: False)
   --dns-sakuracloud     Obtain certificates using a DNS TXT record (if you are
                         using Sakura Cloud for DNS). (default: False)
+  --dns-valuedomain     Obtain certificates using a DNS TXT record (if you are
+                        using Value Domain for DNS). (default: False)
 
 apache:
   Apache Web Server plugin (Please note that the default values of the
@@ -665,6 +667,17 @@ dns-sakuracloud:
                         record. (default: 90)
   --dns-sakuracloud-credentials DNS_SAKURACLOUD_CREDENTIALS
                         Sakura Cloud credentials file. (default: None)
+
+dns-valuedomain:
+  Obtain certificates using a DNS TXT record (if you are using Sakura Cloud
+  for DNS).
+
+  --dns-valuedomain-propagation-seconds DNS_VALUEDOMAIN_PROPAGATION_SECONDS
+                        The number of seconds to wait for DNS to propagate
+                        before asking the ACME server to verify the DNS
+                        record. (default: 90)
+  --dns-sakuracloud-credentials DNS_VALUEDOMAIN_CREDENTIALS
+                        Value Domain credentials file. (default: None)
 
 manual:
   Authenticate through manual configuration or custom shell scripts. When

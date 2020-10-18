@@ -305,6 +305,8 @@ def cli_plugin_requests(config):
         req_auth = set_configurator(req_auth, "dns-route53")
     if config.dns_sakuracloud:
         req_auth = set_configurator(req_auth, "dns-sakuracloud")
+    if config.dns_valuedomain:
+        req_auth = set_configurator(req_auth, "dns-valuedomain")
     logger.debug("Requested authenticator %s and installer %s", req_auth, req_inst)
     return req_auth, req_inst
 
